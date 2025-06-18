@@ -5,15 +5,16 @@ import pandas as pd
 from database import get_produtos, salvar_pedido
 import json
 
+# st.set_page_config() deve ser o primeiro comando streamlit a ser executado
+st.set_page_config(page_title="Fazer Pedido", layout="wide")
+
 # --- VERIFICAÇÃO DE LOGIN ---
 if not st.session_state.get('logged_in'):
     st.error("Você precisa estar logado para acessar esta página.")
     st.page_link("Login.py", label="Ir para a página de Login")
     st.stop()
 
-# --- INICIALIZAÇÃO E CONFIGURAÇÃO ---
-st.set_page_config(page_title="Fazer Pedido", layout="wide")
-
+# --- INICIALIZAÇÃO DO CARRINHO ---
 if 'carrinho' not in st.session_state:
     st.session_state.carrinho = []
 
@@ -32,8 +33,7 @@ with st.sidebar:
     if st.session_state.role == 'admin':
         st.page_link("pages/2_Admin_-_Gerenciar_Cardapio.py", label="Gerenciar Cardápio")
         st.page_link("pages/3_Admin_-_Visualizar_Pedidos.py", label="Visualizar Pedidos")
-        # ADICIONE A LINHA ABAIXO
-        st.page_link("pages/4_Admin_-_Gerenciar_Usuarios.py", label="Gerenciar Usuários") 
+        st.page_link("pages/4_Admin_-_Gerenciar_Usuarios.py", label="Gerenciar Usuários")
         st.markdown("---")
     
     if st.button("Logout"):
@@ -52,7 +52,6 @@ with col1:
         st.warning("Nenhum produto cadastrado.")
     else:
         df_produtos = pd.DataFrame(produtos, columns=["id", "nome", "categoria", "preco"])
-        # ... (O resto do código do cardápio é igual ao app.py anterior) ...
         for categoria in df_produtos["categoria"].unique():
             st.subheader(f"▎ {categoria}")
             produtos_categoria = df_produtos[df_produtos["categoria"] == categoria]
@@ -77,7 +76,6 @@ with col2:
     if not st.session_state.carrinho:
         st.info("Seu carrinho está vazio.")
     else:
-        # ... (O resto do código do carrinho é igual ao app.py anterior) ...
         carrinho_df = pd.DataFrame(st.session_state.carrinho)
         total_pedido = (carrinho_df['preco'] * carrinho_df['quantidade']).sum()
 
@@ -99,7 +97,7 @@ with col2:
         st.markdown("---")
         st.markdown(f"<h3 style='text-align: right;'>Total: R$ {total_pedido:.2f}</h3>", unsafe_allow_html=True)
 
-        if st.button("✅ Confirmar e Finalizar Pedido", use_container_width=True):
+        if st.button("✅ Confirmar e Finalizar Pedido", use_container_width=True, type="primary"):
             itens_pedido = json.dumps([{"item": i["nome"], "qtd": i["quantidade"]} for i in st.session_state.carrinho])
             salvar_pedido(st.session_state.username, itens_pedido, total_pedido)
             st.session_state.carrinho = []
