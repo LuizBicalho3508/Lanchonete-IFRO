@@ -72,4 +72,5 @@ else:
                     else:
                         st.error("Este nome de usuário já existe.")
 
-st.info("Usuário administrador padrão: `admin`, senha: `admin123`")
+# A LINHA ABAIXO FOI REMOVIDA:
+# st.info("Usuário administrador padrão: `admin`, senha: `admin123`")
