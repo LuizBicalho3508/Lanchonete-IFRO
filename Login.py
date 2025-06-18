@@ -6,7 +6,13 @@ from database import criar_tabelas, add_user, verify_user
 # Inicializa o banco e as tabelas
 criar_tabelas()
 
-st.set_page_config(page_title="Login - Lanchonete IFRO", layout="centered")
+# DEFINA A CONFIGURAÇÃO GLOBAL DA PÁGINA AQUI
+st.set_page_config(
+    page_title="Lanchonete IFRO",
+    page_icon="🍔",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 st.title("Bem-vindo à Lanchonete IFRO 🍔")
 
