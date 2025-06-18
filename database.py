@@ -140,3 +140,47 @@ def get_all_pedidos():
     pedidos = conn.execute('SELECT * FROM pedidos ORDER BY data_pedido DESC').fetchall()
     conn.close()
     return pedidos
+
+# Adicione estas funções ao seu arquivo database.py
+
+# --- Funções de Usuário (novas funções para admin) ---
+
+def get_all_users():
+    """Busca todos os usuários cadastrados."""
+    conn = conectar_bd()
+    users = conn.execute('SELECT id, username, role FROM usuarios').fetchall()
+    conn.close()
+    return users
+
+def get_user_by_id(user_id):
+    """Busca um usuário específico pelo seu ID."""
+    conn = conectar_bd()
+    user = conn.execute('SELECT id, username, role FROM usuarios WHERE id = ?', (user_id,)).fetchone()
+    conn.close()
+    return user
+
+def update_user_by_admin(user_id, username, role):
+    """Atualiza o username e o role de um usuário."""
+    conn = conectar_bd()
+    try:
+        conn.execute('UPDATE usuarios SET username = ?, role = ? WHERE id = ?', (username, role, user_id))
+        conn.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False # Acontece se o novo username já existir
+    finally:
+        conn.close()
+
+def reset_user_password(user_id, new_password):
+    """Reseta a senha de um usuário."""
+    conn = conectar_bd()
+    conn.execute('UPDATE usuarios SET password_hash = ? WHERE id = ?', (hash_password(new_password), user_id))
+    conn.commit()
+    conn.close()
+
+def delete_user(user_id):
+    """Exclui um usuário do banco de dados."""
+    conn = conectar_bd()
+    conn.execute('DELETE FROM usuarios WHERE id = ?', (user_id,))
+    conn.commit()
+    conn.close()
