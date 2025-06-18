@@ -32,6 +32,8 @@ with st.sidebar:
     if st.session_state.role == 'admin':
         st.page_link("pages/2_Admin_-_Gerenciar_Cardapio.py", label="Gerenciar Cardápio")
         st.page_link("pages/3_Admin_-_Visualizar_Pedidos.py", label="Visualizar Pedidos")
+        # ADICIONE A LINHA ABAIXO
+        st.page_link("pages/4_Admin_-_Gerenciar_Usuarios.py", label="Gerenciar Usuários") 
         st.markdown("---")
     
     if st.button("Logout"):
