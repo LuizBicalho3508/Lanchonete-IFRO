@@ -24,16 +24,6 @@ def logout():
     st.session_state.username = ""
     st.session_state.role = ""
     st.switch_page("Login.py")
-
-# --- BARRA LATERAL (SIDEBAR) ---
-'''with st.sidebar:
-    st.title(f"Olá, {st.session_state.username}!")
-    st.write(f"Perfil: {st.session_state.role.capitalize()}")
-    st.markdown("---")
-    if st.session_state.role == 'admin':
-        st.page_link("pages/2_Admin_-_Gerenciar_Cardapio.py", label="Gerenciar Cardápio")
-        st.page_link("pages/3_Admin_-_Visualizar_Pedidos.py", label="Visualizar Pedidos")
-        st.page_link("pages/4_Admin_-_Gerenciar_Usuarios.py", label="Gerenciar Usuários")'''
     st.markdown("---")
     
     if st.button("Logout"):
