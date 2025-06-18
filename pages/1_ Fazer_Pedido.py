@@ -34,7 +34,7 @@ def logout():
         st.page_link("pages/2_Admin_-_Gerenciar_Cardapio.py", label="Gerenciar Cardápio")
         st.page_link("pages/3_Admin_-_Visualizar_Pedidos.py", label="Visualizar Pedidos")
         st.page_link("pages/4_Admin_-_Gerenciar_Usuarios.py", label="Gerenciar Usuários")'''
-        st.markdown("---")
+    st.markdown("---")
     
     if st.button("Logout"):
         logout()
