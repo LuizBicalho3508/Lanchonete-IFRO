@@ -1,0 +1,20 @@
+# .streamlit/config.toml
+
+[theme]
+# Define o tema base como "light" (claro) permanentemente.
+base="light"
+
+# Cor primária (laranja) para botões principais, seletores e outros widgets.
+primaryColor="#FF7A00"
+
+# Cor de fundo principal da aplicação.
+backgroundColor="#FFFFFF"
+
+# Cor de fundo para elementos como a barra lateral e containers.
+secondaryBackgroundColor="#F0F4F8"
+
+# Cor do texto principal.
+textColor="#262730"
+
+# Fonte padrão a ser usada.
+font="sans serif"
