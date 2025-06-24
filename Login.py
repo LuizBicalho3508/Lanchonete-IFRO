@@ -2,15 +2,27 @@
 
 import streamlit as st
 from database import criar_tabelas, add_user, verify_user
+import os
 
-# --- CONFIGURAÇÃO GLOBAL DA PÁGINA ---
-# Esta configuração agora é a única em todo o projeto e define o layout para todas as páginas.
+# --- FUNÇÃO PARA CARREGAR O CSS ---
+def load_css(file_name):
+    """Carrega um arquivo CSS local."""
+    if os.path.exists(file_name):
+        with open(file_name) as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# --- CONFIGURAÇÃO DA PÁGINA ---
+# A configuração de tema (base, primaryColor) foi movida para o .streamlit/config.toml
+# Mantemos apenas as configurações de layout aqui.
 st.set_page_config(
     page_title="Lanchonete IFRO",
     page_icon="🍔",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Carrega o nosso CSS customizado
+load_css("style.css")
 
 # Inicializa o banco e as tabelas na primeira execução
 criar_tabelas()
