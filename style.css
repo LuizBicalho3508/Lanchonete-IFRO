@@ -1,46 +1,21 @@
 /* style.css */
 
 /* Remove o header e footer padrão do Streamlit */
-header {visibility: hidden;}
-footer {visibility: hidden;}
-
-/* Customiza a fonte principal da aplicação */
-body {
-    font-family: 'Sans-serif', 'Arial';
+header, footer {
+    visibility: hidden;
 }
 
-/* Estiliza os botões */
-div.stButton > button {
-    background-color: #008037; /* Verde IFRO */
-    color: white;
-    border-radius: 5px;
-    border: none;
-    padding: 8px 16px;
-    width: 100%;
+/* Altera a cor do texto de erro para um tom de laranja queimado, em vez de vermelho. */
+[data-testid="stException"] .st-emotion-cache-1wmy9hl {
+    background-color: rgba(255, 122, 0, 0.15); /* Fundo laranja claro para o box de erro */
 }
 
-div.stButton > button:hover {
-    background-color: #00662c;
-    color: white;
-    border: none;
+/* Garante que os botões de perigo/exclusão também usem um tom de laranja */
+button[kind="secondary"], button[kind="secondary"]:hover {
+    border-color: #FF7A00 !important;
+    color: #FF7A00 !important;
 }
 
-/* Estiliza o botão de finalizar pedido especificamente */
-div.stForm [data-testid="stFormSubmitButton"] > button {
-    background-color: #ffc107; /* Amarelo */
-    color: #333;
-}
-
-div.stForm [data-testid="stFormSubmitButton"] > button:hover {
-    background-color: #e0a800; /* Amarelo mais escuro */
-    color: #333;
-}
-
-/* Adiciona uma borda sutil às seções do cardápio e carrinho */
-[data-testid="stVerticalBlock"] {
-    border-radius: 10px;
-}
-
-[data-testid="stVerticalBlock"] > [data-testid="stVerticalBlock"] {
-     padding: 1rem;
+button[kind="secondary"]:focus {
+    box-shadow: #FF7A00 0px 0px 0px 0.2rem;
 }
